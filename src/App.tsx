@@ -21,55 +21,47 @@ function App() {
   return (
     <>
       <section id="center">
-        <div>
-          <h1>To-Do List</h1>
+        <h1>To-Do List</h1>
 
-          <form
-            onSubmit={handleAddTask}
-            style={{ display: "flex", gap: "8px", marginBottom: "16px" }}
-          >
-            <input
-              type="text"
-              value={newTaskText}
-              onChange={(e) => setNewTaskText(e.target.value)}
-              placeholder="What needs to be done?"
-            />
-            <button type="submit">Add</button>
-          </form>
+        <form
+          onSubmit={handleAddTask}
+          style={{ display: "flex", gap: "8px", marginBottom: "16px" }}
+        >
+          <input
+            type="text"
+            value={newTaskText}
+            onChange={(e) => setNewTaskText(e.target.value)}
+            placeholder="What needs to be done?"
+          />
+          <button type="submit">Add</button>
+        </form>
 
-          <ul style={{ listStyle: "none", padding: 0 }}>
-            {tasks?.map((task) => (
-              <li
-                key={task._id}
+        <ul style={{ listStyle: "none", padding: 0 }}>
+          {tasks?.map((task) => (
+            <li
+              key={task._id}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+                marginBottom: "8px",
+              }}
+            >
+              <input
+                type="checkbox"
+                checked={task.isCompleted}
+                onChange={() => toggleTask({ id: task._id })}
+              />
+              <span
                 style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  marginBottom: "8px",
+                  textDecoration: task.isCompleted ? "line-through" : "none",
                 }}
               >
-                <input
-                  type="checkbox"
-                  checked={task.isCompleted}
-                  onChange={() => toggleTask({ id: task._id })}
-                />
-                <span
-                  style={{
-                    textDecoration: task.isCompleted ? "line-through" : "none",
-                  }}
-                >
-                  {task.text}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div>
-
-          Second side
-          
-        </div>
+                {task.text}
+              </span>
+            </li>
+          ))}
+        </ul>
       </section>
     </>
   );
